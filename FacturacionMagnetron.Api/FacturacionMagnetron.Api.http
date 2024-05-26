@@ -1,0 +1,6 @@
+@FacturacionMagnetron.Api_HostAddress = http://localhost:5190
+
+GET {{FacturacionMagnetron.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
