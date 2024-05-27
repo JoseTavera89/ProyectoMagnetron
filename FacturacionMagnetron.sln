@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacturacionMagnetron.Api", "FacturacionMagnetron.Api\FacturacionMagnetron.Api.csproj", "{822BE08D-903B-4514-9A2B-9D0E56EE26BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FacturacionMagnetron.Api", "FacturacionMagnetron.Api\FacturacionMagnetron.Api.csproj", "{822BE08D-903B-4514-9A2B-9D0E56EE26BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacturacionMagnetron.Application", "FacturacionMagnetron.Application\FacturacionMagnetron.Application.csproj", "{8FAD3D47-CC41-4DA0-8DBA-C9D1895AA2E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FacturacionMagnetron.Application", "FacturacionMagnetron.Application\FacturacionMagnetron.Application.csproj", "{8FAD3D47-CC41-4DA0-8DBA-C9D1895AA2E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacturacionMagnetron.Domain", "FacturacionMagnetron.Domain\FacturacionMagnetron.Domain.csproj", "{E6E0E4B4-4C37-46F9-9D6B-875C021014F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FacturacionMagnetron.Domain", "FacturacionMagnetron.Domain\FacturacionMagnetron.Domain.csproj", "{E6E0E4B4-4C37-46F9-9D6B-875C021014F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacturacionMagnetron.Infrastructure", "FacturacionMagnetron.Infrastructure\FacturacionMagnetron.Infrastructure.csproj", "{F7B74E0A-6F97-41F6-B16B-18418881347C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FacturacionMagnetron.Infrastructure", "FacturacionMagnetron.Infrastructure\FacturacionMagnetron.Infrastructure.csproj", "{F7B74E0A-6F97-41F6-B16B-18418881347C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacturacionMagnetron.Test", "FacturacionMagnetron.Test\FacturacionMagnetron.Test.csproj", "{0655AC59-A5AF-46C4-BD44-9752B45445A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F7B74E0A-6F97-41F6-B16B-18418881347C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7B74E0A-6F97-41F6-B16B-18418881347C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7B74E0A-6F97-41F6-B16B-18418881347C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0655AC59-A5AF-46C4-BD44-9752B45445A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0655AC59-A5AF-46C4-BD44-9752B45445A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0655AC59-A5AF-46C4-BD44-9752B45445A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0655AC59-A5AF-46C4-BD44-9752B45445A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

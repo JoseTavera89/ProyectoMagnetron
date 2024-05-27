@@ -17,5 +17,7 @@ namespace FacturacionMagnetron.Infrastructure.Persistense
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<FacturaDetalle> FacturaDetalle { get; set; }
         public virtual DbSet<FacturaEncabezado> FacturaEncabezado { get; set; }
+        public virtual DbSet<VistaPersonaFacturado> VistaPersonaFacturado { get; set; }
+        public virtual DbSet<VistaPersonaProductoMasCaro> VistaPersonaProductoMasCaro { get; set; }
     }
 }

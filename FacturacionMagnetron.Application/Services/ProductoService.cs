@@ -20,7 +20,6 @@ namespace FacturacionMagnetron.Application.Services
             var data = obj.Adapt<Producto>();
             var response = await _uowMagnetron.Producto.Add(data);
             SaveChanges();
-            var nuevo = data.Prod_Id;
             return ResponseDto<bool>.Success(response);
         }
 

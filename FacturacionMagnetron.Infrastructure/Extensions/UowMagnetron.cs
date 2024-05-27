@@ -1,5 +1,6 @@
 ﻿using FacturacionMagnetron.Domain.Entities;
 using FacturacionMagnetron.Domain.Interfaces.Repository;
+using FacturacionMagnetron.Domain.Interfaces.Services;
 using FacturacionMagnetron.Domain.Interfaces.UnitOfWork;
 using FacturacionMagnetron.Infrastructure.Persistense;
 using FacturacionMagnetron.Infrastructure.Repository;
@@ -17,7 +18,10 @@ namespace FacturacionMagnetron.Infrastructure.Extensions
         public IGenericRepository<Persona> _persona;
         public IGenericRepository<Producto> _producto;
         public IGenericRepository<FacturaEncabezado> _facturaEncabezado;
-        IGenericRepository<FacturaDetalle> _facturaDetalle;
+        public IGenericRepository<FacturaDetalle> _facturaDetalle;
+        public IViewRepository<VistaPersonaFacturado> _vistaPersonaFacturado;
+        public IViewRepository<VistaPersonaProductoMasCaro> _vistaPersonaProductoMasCaro;
+        
         public UowMagnetron(MagnetronDBContext magnetronDBContext)
         {
             _magnetronDBContext = magnetronDBContext;
@@ -59,6 +63,23 @@ namespace FacturacionMagnetron.Infrastructure.Extensions
             }
         }
 
+        public IViewRepository<VistaPersonaFacturado> VistaPersonaFacturado
+        {
+            get
+            {
+                return _vistaPersonaFacturado == null ?
+                       _vistaPersonaFacturado = new ViewRepository<VistaPersonaFacturado>(_magnetronDBContext) : _vistaPersonaFacturado;
+            }
+        }
+
+        public IViewRepository<VistaPersonaProductoMasCaro> VistaPersonaProductoMasCaro
+        {
+            get
+            {
+                return _vistaPersonaProductoMasCaro == null ?
+                       _vistaPersonaProductoMasCaro = new ViewRepository<VistaPersonaProductoMasCaro>(_magnetronDBContext) : _vistaPersonaProductoMasCaro;
+            }
+        }
         public void Dispose()
         {
             _magnetronDBContext.Dispose();

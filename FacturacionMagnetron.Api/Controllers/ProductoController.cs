@@ -1,7 +1,5 @@
 ﻿using FacturacionMagnetron.Domain.Dto;
-using FacturacionMagnetron.Domain.Entities;
 using FacturacionMagnetron.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FacturacionMagnetron.Api.Controllers
@@ -18,15 +16,15 @@ namespace FacturacionMagnetron.Api.Controllers
             _genericService = genericService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<ResponseDto<IEnumerable<ProductoDto>>>> GetFacturasAsync()
+        [HttpGet("GetProductosAsync")]
+        public async Task<ActionResult<ResponseDto<IEnumerable<ProductoDto>>>> GetProductosAsync()
         {
             var response = await _genericService.GetAll();
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ResponseDto<ProductoDto>>> GetFacturaAsync(int id)
+        [HttpGet("GetProductoAsync/{id}")]
+        public async Task<ActionResult<ResponseDto<ProductoDto>>> GetProductoAsync(int id)
         {
             var response = await _genericService.Get(id);
             if (response.Value == null)
@@ -36,15 +34,15 @@ namespace FacturacionMagnetron.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<ResponseDto<ProductoDto>>> AddAFacturaAsync(ProductoDto producto)
+        [HttpPost("AddAProductoAsync")]
+        public async Task<ActionResult<ResponseDto<ProductoDto>>> AddAProductoAsync(ProductoDto producto)
         {
             var response = await _genericService.Add(producto);
             return Ok(response);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<ResponseDto<bool>>> PutUsuario(int id, ProductoDto producto)
+        [HttpPut("PutProducto/{id}")]
+        public async Task<ActionResult<ResponseDto<bool>>> PutProducto(int id, ProductoDto producto)
         {
             if (id != producto.Prod_Id)
             {
@@ -54,8 +52,8 @@ namespace FacturacionMagnetron.Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ResponseDto<bool>>> DeleteUsuario(ProductoDto producto)
+        [HttpDelete("DeleteProducto/{id}")]
+        public async Task<ActionResult<ResponseDto<bool>>> DeleteProducto(ProductoDto producto)
         {
             var response = await _genericService.Delete(producto);
             return Ok(response);

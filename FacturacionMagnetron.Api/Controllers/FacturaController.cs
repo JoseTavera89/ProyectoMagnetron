@@ -1,6 +1,5 @@
 ﻿using FacturacionMagnetron.Domain.Dto;
 using FacturacionMagnetron.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FacturacionMagnetron.Api.Controllers
@@ -16,14 +15,14 @@ namespace FacturacionMagnetron.Api.Controllers
             _genericService = genericService;
         }
 
-        [HttpGet]
+        [HttpGet("GetFacturasAsync")]
         public async Task<ActionResult<ResponseDto<IEnumerable<FacturaDto>>>> GetFacturasAsync()
         {
             var response = await _genericService.GetAll();
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetFacturaAsync/{id}")]
         public async Task<ActionResult<ResponseDto<FacturaDto>>> GetFacturaAsync(int id)
         {
             var response = await _genericService.Get(id);
@@ -34,14 +33,14 @@ namespace FacturacionMagnetron.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
+        [HttpPost("AddAFacturaAsync")]
         public async Task<ActionResult<ResponseDto<FacturaDto>>> AddAFacturaAsync(FacturaDto factura)
         {
             var response = await _genericService.Add(factura);
             return Ok(response);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("PutFactura/{id}")]
         public async Task<ActionResult<ResponseDto<bool>>> PutFactura(int id, FacturaDto factura)
         {
             if (id != factura.FacturaEncabezado.FEnc_Id)
@@ -52,7 +51,7 @@ namespace FacturacionMagnetron.Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteFactura")]
         public async Task<ActionResult<ResponseDto<bool>>> DeleteFactura(FacturaDto factura)
         {
             var response = await _genericService.Delete(factura);

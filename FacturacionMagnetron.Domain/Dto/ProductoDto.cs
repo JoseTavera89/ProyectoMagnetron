@@ -17,6 +17,6 @@ namespace FacturacionMagnetron.Domain.Dto
         [Required]
         public decimal Prod_Costo { get; set; }
         [Required]
-        public decimal Prod_UM { get; set; }
+        public string Prod_UM { get; set; }
     }
 }

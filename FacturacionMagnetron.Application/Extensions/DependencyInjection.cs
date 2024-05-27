@@ -20,6 +20,8 @@ namespace FacturacionMagnetron.Application.Extensions
             services.AddScoped(typeof(IGenericService<PersonaDto>), typeof(PersonaService));
             services.AddScoped(typeof(IGenericService<ProductoDto>), typeof(ProductoService));
             services.AddScoped(typeof(IGenericService<FacturaDto>), typeof(FacturaService));
+            services.AddScoped(typeof(IViewService<VistaPersonaFacturadoDto>), typeof(VistaPersonaFacturadoService));
+            services.AddScoped(typeof(IViewService<VistaPersonaProductoMasCaroDto>), typeof(VistaPersonaProductoMasCaroService));
         }
     }
 }

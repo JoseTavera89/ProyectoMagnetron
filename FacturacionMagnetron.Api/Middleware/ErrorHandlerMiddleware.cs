@@ -41,7 +41,7 @@ namespace FacturacionMagnetron.Api.Middleware
             }
 
             _logger.LogError("Error: { error},", exception.Message);
-
+            Log.Save("Error " + exception.Message);
             var result = JsonSerializer.Serialize(errorResponse, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,

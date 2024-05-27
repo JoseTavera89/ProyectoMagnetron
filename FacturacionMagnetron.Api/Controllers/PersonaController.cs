@@ -1,7 +1,5 @@
 ﻿using FacturacionMagnetron.Domain.Dto;
-using FacturacionMagnetron.Domain.Entities;
 using FacturacionMagnetron.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FacturacionMagnetron.Api.Controllers

@@ -13,7 +13,7 @@ namespace FacturacionMagnetron.Domain.Dto
         [Required]
         public int FDet_Linea { get; set; }
         [Required]
-        public int FDetCantidad { get; set; }
+        public int FDet_Cantidad { get; set; }
         [Required]
         public int Prod_Id { get; set; }
         [Required]

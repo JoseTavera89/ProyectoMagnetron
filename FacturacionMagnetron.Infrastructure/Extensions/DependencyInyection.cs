@@ -18,11 +18,12 @@ namespace FacturacionMagnetron.Infrastructure.Extensions
     {
         public static void AddDbContext(this IServiceCollection services,IConfiguration configuration)
         {
-            services.AddDbContext<MagnetronDBContext>(options => { options.UseSqlServer(configuration.GetConnectionString("MagnetronDbContext")); });
+            string ConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ??
+                                      configuration.GetConnectionString("MagnetronDbContext");
+            services.AddDbContext<MagnetronDBContext>(options => { options.UseSqlServer(ConnectionString); });
         }
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUowMagnetron, UowMagnetron>();
 
         }

@@ -15,7 +15,7 @@ namespace FacturacionMagnetron.Domain.Entities
         public string? Prod_Descripcion { get; set; }
         public decimal Prod_Precio { get; set; }
         public decimal Prod_Costo { get; set; }
-        public decimal Prod_UM { get; set; }
+        public string Prod_UM { get; set; }
 
     }
 }

@@ -1,5 +1,7 @@
-﻿using FacturacionMagnetron.Domain.Entities;
+﻿using FacturacionMagnetron.Domain.Dto;
+using FacturacionMagnetron.Domain.Entities;
 using FacturacionMagnetron.Domain.Interfaces.Repository;
+using FacturacionMagnetron.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +18,8 @@ namespace FacturacionMagnetron.Domain.Interfaces.UnitOfWork
         IGenericRepository<Producto> Producto { get; }
         IGenericRepository<FacturaEncabezado> FacturaEncabezado { get; }
         IGenericRepository<FacturaDetalle> FacturaDetalle { get; }
+
+        IViewRepository<VistaPersonaFacturado> VistaPersonaFacturado { get; }
+        IViewRepository<VistaPersonaProductoMasCaro> VistaPersonaProductoMasCaro { get; }
     }
 }
