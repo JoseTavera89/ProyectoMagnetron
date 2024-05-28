@@ -21,5 +21,9 @@ namespace FacturacionMagnetron.Domain.Interfaces.UnitOfWork
 
         IViewRepository<VistaPersonaFacturado> VistaPersonaFacturado { get; }
         IViewRepository<VistaPersonaProductoMasCaro> VistaPersonaProductoMasCaro { get; }
+        IViewRepository<VistaProductosPorCantidad> VistaProductosPorCantidad { get; }
+        IViewRepository<VistaProductosPorUtilidad> VistaProductosPorUtilidad { get; }
+        IViewRepository<VistaProductosPorMargenGanancia> VistaProductosPorMargenGanancia { get; }
+
     }
 }

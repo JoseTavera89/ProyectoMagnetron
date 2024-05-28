@@ -2,14 +2,8 @@
 using FacturacionMagnetron.Domain.Dto;
 using FacturacionMagnetron.Domain.Entities;
 using FacturacionMagnetron.Domain.Interfaces.UnitOfWork;
-using FacturacionMagnetron.Infrastructure.Persistense;
-using Microsoft.EntityFrameworkCore;
+using Mapster;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FacturacionMagnetron.Test
 {
@@ -17,21 +11,16 @@ namespace FacturacionMagnetron.Test
     public class ProductoServiceTests
     {
         private Mock<IUowMagnetron> _mockUowMagnetron;
-        private ProductoDto producto;
-        private DbContextOptions<MagnetronDBContext> options;
+        private ProductoDto productoDto;
         private ProductoService _productoService;
 
         [SetUp]
         public void Setup()
         {
-            options = new DbContextOptionsBuilder<MagnetronDBContext>()
-                .UseInMemoryDatabase(databaseName: "Tem_MagnetronDb").Options;
-
             _mockUowMagnetron = new Mock<IUowMagnetron>();
             _productoService = new ProductoService(_mockUowMagnetron.Object);
 
-
-            producto = new ProductoDto
+            productoDto = new ProductoDto
             {
                 Prod_Id = 1,
                 Prod_Descripcion = "Gorras",
@@ -42,38 +31,116 @@ namespace FacturacionMagnetron.Test
         }
 
         [Test]
-        public async Task Add_Person_ResponseTrue()
+        public async Task Add_Product_ResponseTrue()
         {
             // Arrange
-
-           // var contex = new MagnetronDBContext(options);
-           // await contex.Set<Persona>().AddAsync(persona);
-           // await contex.SaveChangesAsync();
-
-            _mockUowMagnetron.Setup(u => u.Producto.Get(It.IsAny<int>())).ReturnsAsync(new Producto());
+            var product = productoDto.Adapt<Producto>();
+            _mockUowMagnetron.Setup(u => u.Producto.Add(It.IsAny<Producto>())).ReturnsAsync(true);
 
             // Act
-            var response = await _productoService.Add(producto);
+            var response = await _productoService.Add(productoDto);
 
             // Assert
-            Assert.IsTrue(response.IsSuccess);
-            Assert.AreEqual(true, response.IsSuccess);
+            Assert.That(response.IsSuccess, Is.EqualTo(true));
         }
+
+
         [Test]
-        public async Task Delete_ExistingProductoDto_ReturnsSuccessResponse()
+        public async Task Delete_ExistingProductoDto_ReturnsTrue()
         {
             // Arrange
-            var existingProducto = new Producto { Prod_Id = 1};
-
-            _mockUowMagnetron.Setup(u => u.Producto.Get(producto.Prod_Id)).ReturnsAsync(existingProducto);
+            var existingProducto = new Producto
+            {
+                Prod_Id = 1,
+                Prod_Descripcion = "Gorras",
+                Prod_Costo = 5,
+                Prod_Precio = 15,
+                Prod_UM = "Unidad"
+            };
+            _mockUowMagnetron.Setup(u => u.Producto.Get(It.IsAny<int>())).ReturnsAsync(existingProducto);
             _mockUowMagnetron.Setup(u => u.Producto.Delete(It.IsAny<Producto>())).ReturnsAsync(true);
 
             // Act
-            var response = await _productoService.Delete(producto);
+            var response = await _productoService.Delete(productoDto);
 
             // Assert
-            Assert.IsTrue(response.IsSuccess);
-            Assert.AreEqual(true, response.Value);
+            Assert.That(response.IsSuccess, Is.EqualTo(true));
+        }
+        [Test]
+        public async Task Delete_NonExistingProducto_ReturnsFailure()
+        {
+            // Arrange
+            var mockUow = new Mock<IUowMagnetron>();
+            var service = new ProductoService(mockUow.Object);
+            var nonExistingProductId = 2; 
+            mockUow.Setup(u => u.Producto.Get(nonExistingProductId)).ReturnsAsync((Producto)null); 
+
+            // Act
+            var response = await service.Delete(new ProductoDto { Prod_Id = nonExistingProductId });
+
+            // Assert
+            Assert.That(response.IsSuccess, Is.EqualTo(false));
+            Assert.That(response.MessageError, Is.EqualTo("No existe el producto"));
+        }
+
+        [Test]
+        public async Task Get_ValidId_ReturnsProductoDto()
+        {
+            // Arrange
+            var existingProducto = productoDto.Adapt<Producto>();
+            _mockUowMagnetron.Setup(u => u.Producto.Get(productoDto.Prod_Id)).ReturnsAsync(existingProducto);
+
+            // Act
+            var response = await _productoService.Get(productoDto.Prod_Id);
+
+            // Assert
+            Assert.That(response.IsSuccess, Is.EqualTo(true));
+        }
+
+        [Test]
+        public async Task GetAll_ReturnsListOfProductoDto()
+        {
+            // Arrange
+            var productos = new List<Producto>
+            {
+                new Producto { Prod_Id = 1,Prod_Descripcion = "Gorras", Prod_Costo = 5,Prod_Precio = 15,Prod_UM = "Unidad"},
+                new Producto {  Prod_Id = 2,Prod_Descripcion = "Balon", Prod_Costo = 15,Prod_Precio = 25,Prod_UM = "Unidad" },
+            };
+            var productosDto = productos.Adapt<IEnumerable<ProductoDto>>();
+            _mockUowMagnetron.Setup(u => u.Producto.GetAll()).ReturnsAsync(productos);
+
+            // Act
+            var response = await _productoService.GetAll();
+
+            // Assert
+            Assert.That(response.IsSuccess, Is.EqualTo(true));
+            Assert.IsNotNull(response.Value);
+            var resultProductosDto = response.Value.ToList();
+            Assert.That(resultProductosDto.Count, Is.EqualTo(productosDto.Count()));
+        }
+
+        [Test]
+        public async Task Update_ExistingProducto_ReturnsSuccessResponse()
+        {
+            // Arrange
+
+            var existingProducto = new Producto
+            {
+                Prod_Id = 1,
+                Prod_Descripcion = "Gorras",
+                Prod_Costo = 20,
+                Prod_Precio = 15,
+                Prod_UM = "Unidad"
+            };
+
+            _mockUowMagnetron.Setup(u => u.Producto.Get(productoDto.Prod_Id)).ReturnsAsync(existingProducto);
+            _mockUowMagnetron.Setup(u => u.Producto.Update(It.IsAny<Producto>())).ReturnsAsync(true);
+
+            // Act
+            var response = await _productoService.Update(productoDto);
+
+            // Assert
+            Assert.That(response.IsSuccess, Is.EqualTo(true));
         }
 
     }

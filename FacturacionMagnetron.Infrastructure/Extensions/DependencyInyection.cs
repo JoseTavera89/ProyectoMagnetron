@@ -1,16 +1,8 @@
-﻿using FacturacionMagnetron.Domain.Interfaces.Repository;
-using FacturacionMagnetron.Domain.Interfaces.Services;
-using FacturacionMagnetron.Domain.Interfaces.UnitOfWork;
+﻿using FacturacionMagnetron.Domain.Interfaces.UnitOfWork;
 using FacturacionMagnetron.Infrastructure.Persistense;
-using FacturacionMagnetron.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FacturacionMagnetron.Infrastructure.Extensions
 {

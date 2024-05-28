@@ -1,4 +1,5 @@
-﻿using FacturacionMagnetron.Domain.Entities;
+﻿using FacturacionMagnetron.Domain.Dto;
+using FacturacionMagnetron.Domain.Entities;
 using FacturacionMagnetron.Domain.Interfaces.Repository;
 using FacturacionMagnetron.Domain.Interfaces.Services;
 using FacturacionMagnetron.Domain.Interfaces.UnitOfWork;
@@ -21,7 +22,12 @@ namespace FacturacionMagnetron.Infrastructure.Extensions
         public IGenericRepository<FacturaDetalle> _facturaDetalle;
         public IViewRepository<VistaPersonaFacturado> _vistaPersonaFacturado;
         public IViewRepository<VistaPersonaProductoMasCaro> _vistaPersonaProductoMasCaro;
+        public IViewRepository<VistaProductosPorCantidad> _vistaProductosPorCantidad;
+        public IViewRepository<VistaProductosPorUtilidad> _vistaProductosPorUtilidad;
+        public IViewRepository<VistaProductosPorMargenGanancia> _vistaProductosPorMargenGanancia;
         
+
+
         public UowMagnetron(MagnetronDBContext magnetronDBContext)
         {
             _magnetronDBContext = magnetronDBContext;
@@ -80,6 +86,33 @@ namespace FacturacionMagnetron.Infrastructure.Extensions
                        _vistaPersonaProductoMasCaro = new ViewRepository<VistaPersonaProductoMasCaro>(_magnetronDBContext) : _vistaPersonaProductoMasCaro;
             }
         }
+        public IViewRepository<VistaProductosPorCantidad> VistaProductosPorCantidad
+        {
+            get
+            {
+                return _vistaProductosPorCantidad == null ?
+                       _vistaProductosPorCantidad = new ViewRepository<VistaProductosPorCantidad>(_magnetronDBContext) : _vistaProductosPorCantidad;
+            }
+        }
+
+        public IViewRepository<VistaProductosPorUtilidad> VistaProductosPorUtilidad
+        {
+            get
+            {
+                return _vistaProductosPorUtilidad == null ?
+                       _vistaProductosPorUtilidad = new ViewRepository<VistaProductosPorUtilidad>(_magnetronDBContext) : _vistaProductosPorUtilidad;
+            }
+        }
+        public IViewRepository<VistaProductosPorMargenGanancia> VistaProductosPorMargenGanancia
+        {
+            get
+            {
+                return _vistaProductosPorMargenGanancia == null ?
+                       _vistaProductosPorMargenGanancia = new ViewRepository<VistaProductosPorMargenGanancia>(_magnetronDBContext) : _vistaProductosPorMargenGanancia;
+            }
+        }
+        
+
         public void Dispose()
         {
             _magnetronDBContext.Dispose();

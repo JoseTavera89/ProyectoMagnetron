@@ -17,7 +17,6 @@ namespace FacturacionMagnetron.Application.Services
 
         public async Task<ResponseDto<bool>> Add(FacturaDto obj)
         {
-            // Verificar si la persona y el producto existen
             var persona = await _uowMagnetron.Persona.Get(obj.FacturaEncabezado.Per_Id);
             if (persona == null)
             {
@@ -104,12 +103,13 @@ namespace FacturacionMagnetron.Application.Services
             var data = await _uowMagnetron.FacturaEncabezado.Get(obj.FacturaEncabezado.FEnc_Id);
             if (data != null)
             {
+                dataFacturaEncabezado = obj.Adapt(data);
                 await _uowMagnetron.FacturaEncabezado.Update(dataFacturaEncabezado);
                 await _uowMagnetron.FacturaDetalle.Update(dataFacturaDetalle);
                 SaveChanges();
                 return ResponseDto<bool>.Success(true);
             }
-            return ResponseDto<bool>.Failure("No existe la persona");
+            return ResponseDto<bool>.Failure("No existe la Factura");
         }
 
         private void SaveChanges()

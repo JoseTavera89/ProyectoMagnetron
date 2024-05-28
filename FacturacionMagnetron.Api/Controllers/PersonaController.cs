@@ -43,8 +43,8 @@ namespace FacturacionMagnetron.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut("UpdatePersona/{id}")]
-        public async Task<ActionResult<ResponseDto<bool>>> UpdatePersona(int id, PersonaDto persona)
+        [HttpPut("UpdatePersonaAsync/{id}")]
+        public async Task<ActionResult<ResponseDto<bool>>> UpdatePersonaAsync(int id, PersonaDto persona)
         {
             if (id != persona.Per_Id)
             {
@@ -54,8 +54,8 @@ namespace FacturacionMagnetron.Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("DeletePersona")]
-        public async Task<ActionResult<ResponseDto<bool>>> DeletePersona(PersonaDto persona)
+        [HttpDelete("DeletePersonaAsync")]
+        public async Task<ActionResult<ResponseDto<bool>>> DeletePersonaAsync(PersonaDto persona)
         {
             var response = await _genericService.Delete(persona);
             return Ok(response);

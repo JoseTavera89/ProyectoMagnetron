@@ -52,11 +52,11 @@ namespace FacturacionMagnetron.Application.Services
         public async Task<ResponseDto<bool>> Update(PersonaDto obj)
         {
 
-            var objSend = obj.Adapt<Persona>();
             var data = await _uowMagnetron.Persona.Get(obj.Per_Id);
             if (data != null)
             {
-                await _uowMagnetron.Persona.Update(objSend);
+                data = obj.Adapt(data);
+                await _uowMagnetron.Persona.Update(data);
                 SaveChanges();
                 return ResponseDto<bool>.Success(true);
             }

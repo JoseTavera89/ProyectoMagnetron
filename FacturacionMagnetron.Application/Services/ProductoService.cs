@@ -49,11 +49,12 @@ namespace FacturacionMagnetron.Application.Services
 
         public async Task<ResponseDto<bool>> Update(ProductoDto obj)
         {
-            var objSend = obj.Adapt<Producto>();
             var data = await _uowMagnetron.Producto.Get(obj.Prod_Id);
+
             if (data != null)
             {
-                await _uowMagnetron.Producto.Update(objSend);
+                data = obj.Adapt(data);
+                await _uowMagnetron.Producto.Update(data);
                 SaveChanges();
                 return ResponseDto<bool>.Success(true);
             }

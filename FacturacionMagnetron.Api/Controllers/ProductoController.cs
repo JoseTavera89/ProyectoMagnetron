@@ -41,8 +41,8 @@ namespace FacturacionMagnetron.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut("PutProducto/{id}")]
-        public async Task<ActionResult<ResponseDto<bool>>> PutProducto(int id, ProductoDto producto)
+        [HttpPut("PutProductoAsync/{id}")]
+        public async Task<ActionResult<ResponseDto<bool>>> PutProductoAsync(int id, ProductoDto producto)
         {
             if (id != producto.Prod_Id)
             {
@@ -52,11 +52,12 @@ namespace FacturacionMagnetron.Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("DeleteProducto/{id}")]
-        public async Task<ActionResult<ResponseDto<bool>>> DeleteProducto(ProductoDto producto)
+        [HttpDelete("DeleteProductoAsync/{id}")]
+        public async Task<ActionResult<ResponseDto<bool>>> DeleteProductoAsync(ProductoDto producto)
         {
             var response = await _genericService.Delete(producto);
             return Ok(response);
         }
+
     }
 }

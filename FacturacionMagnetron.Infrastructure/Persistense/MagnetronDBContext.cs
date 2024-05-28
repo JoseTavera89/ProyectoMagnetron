@@ -1,4 +1,5 @@
-﻿using FacturacionMagnetron.Domain.Entities;
+﻿using FacturacionMagnetron.Domain.Dto;
+using FacturacionMagnetron.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,11 @@ namespace FacturacionMagnetron.Infrastructure.Persistense
         public virtual DbSet<FacturaEncabezado> FacturaEncabezado { get; set; }
         public virtual DbSet<VistaPersonaFacturado> VistaPersonaFacturado { get; set; }
         public virtual DbSet<VistaPersonaProductoMasCaro> VistaPersonaProductoMasCaro { get; set; }
+        public virtual DbSet<VistaProductosPorCantidad> VistaProductosPorCantidad { get; set; }
+        public virtual DbSet<VistaProductosPorUtilidad> VistaProductosPorUtilidad { get; set; }
+        public virtual DbSet<VistaProductosPorMargenGanancia> VistaProductosPorMargenGanancia { get; set; }
+        
+
+
     }
 }

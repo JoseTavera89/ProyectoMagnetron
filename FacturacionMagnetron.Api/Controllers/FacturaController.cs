@@ -40,8 +40,8 @@ namespace FacturacionMagnetron.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut("PutFactura/{id}")]
-        public async Task<ActionResult<ResponseDto<bool>>> PutFactura(int id, FacturaDto factura)
+        [HttpPut("PutFacturaAsync/{id}")]
+        public async Task<ActionResult<ResponseDto<bool>>> PutFacturaAsync(int id, FacturaDto factura)
         {
             if (id != factura.FacturaEncabezado.FEnc_Id)
             {
@@ -51,8 +51,8 @@ namespace FacturacionMagnetron.Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("DeleteFactura")]
-        public async Task<ActionResult<ResponseDto<bool>>> DeleteFactura(FacturaDto factura)
+        [HttpDelete("DeleteFacturaAsync")]
+        public async Task<ActionResult<ResponseDto<bool>>> DeleteFacturaAsync(FacturaDto factura)
         {
             var response = await _genericService.Delete(factura);
             return Ok(response);
