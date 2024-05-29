@@ -5,8 +5,8 @@ USER app
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
-ENV DB_CONNECTION_STRING="Server=192.168.10.2,1433;Database=Magnetron;User Id=soporte;Password=soporte;MultipleActiveResultSets=true;TrustServerCertificate=True"
 
+ENV DB_CONNECTION_STRING="Server=127.0.0.1,1433;Database=Magnetron;User Id=usuario;Password=contraseña;MultipleActiveResultSets=true;TrustServerCertificate=True"
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
